@@ -1,0 +1,12 @@
+.venv/
+.idea/
+__pycache__/
+.pytest_cache/
+build/
+dist/
+outputs/
+checkpoints/
+*.egg-info/
+.DS_Store
+manifest.json
+datasets/pretraining/*.cjsonl

@@ -1,0 +1,80 @@
+[run]
+name = "grapht5"
+checkpoint_dir = "checkpoints"
+model_path = "none"
+local_rank = -1
+main_port = -1
+cpu = false
+seed = 0
+
+[data]
+train_data = "none"
+eval_data = "none"
+no_prefix = false
+drop_t5_passages = false
+
+[model]
+model_size = "base"
+use_checkpoint = false
+use_adapted_model = false
+adapted_model_path = "pretrained_model/pytorch_model.bin"
+dropout = 0.1
+add_consistency_loss = false
+
+[model.text]
+n_context = 15
+text_maxlength = 512
+answer_maxlength = 512
+
+[model.graph]
+node_max_length = 40
+max_nodes_per_graph = 40
+graph_attention_layers = 6
+no_learned_gate = false
+disable_edge_attention = false
+
+[optimization]
+optim = "adamw"
+scheduler = "linear"
+lr = 0.0004
+lr_vdg = 0.0004
+weight_decay = 0.1
+weight_decay_vdg = 0.1
+min_lr_ratio = 0.02
+clip = 1.0
+accumulation_steps = 32
+freeze_t5 = 0
+t5_unfreeze_lr = 0.00003
+t5_unfreeze_warmup_steps = 20000
+fixed_lr = false
+lr_factor = 0.5
+lr_threshold = 0.001
+patience = 1
+
+[training]
+schedule = "finetune"
+epochs = 20
+per_gpu_train_batch_size = 2
+disable_torch_compile = true
+
+[evaluation]
+per_gpu_eval_batch_size = 1
+eval_print_freq = 1000
+eval_freq = 500
+beam_size = 1
+num_return_sequences = 1
+language = "cpp"
+with_em = true
+with_codebleu = true
+write_results = false
+write_crossattention_scores = false
+
+[logging]
+use_wandb = false
+wandb_project = "grapht5-training"
+wandb_entity = ""
+wandb_run_name = ""
+wandb_tags = []
+wandb_log_freq = 100
+wandb_plot_freq = 500
+wandb_watch_model = false

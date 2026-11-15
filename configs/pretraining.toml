@@ -1,0 +1,22 @@
+extends = "base.toml"
+
+[run]
+name = "grapht5_pretrain_dualcross_n3"
+
+[model.text]
+n_context = 3
+
+[optimization]
+lr = 0.0003
+min_lr_ratio = 0.1
+freeze_t5 = 20000
+
+[training]
+schedule = "pretrain"
+epochs = 8
+warmup_steps = 625
+eval_freq = 999999999
+disable_torch_compile = false
+
+[evaluation]
+per_gpu_eval_batch_size = 0
